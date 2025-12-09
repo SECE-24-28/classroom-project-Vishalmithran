@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recharge App</title>
+    <link rel="stylesheet" href="day3.css">
+</head>
+<body>
+
+<nav>
+    <div class="nav-left">RechargeApp</div>
+    <ul class="nav-center">
+        <li><a class="active" onclick="showSection('login', this)">Login</a></li>
+        <li><a onclick="showSection('otp', this)">OTP</a></li>
+        <li><a onclick="showSection('signup', this)">Sign Up</a></li>
+        <li><a onclick="showSection('recharge', this)">Recharge</a></li>
+        <li><a onclick="showSection('wallet', this)">Wallet</a></li>
+        <li><a onclick="showSection('addmoney', this)">Add Money</a></li>
+        <li><a onclick="showSection('history', this)">History</a></li>
+        <li><a onclick="showSection('offers', this)">Offers</a></li>
+        <li><a onclick="showSection('reminder', this)">Reminder</a></li>
+    </ul>
+</nav>
+
+<!-- LOGIN -->
+<div id="login" class="section container active">
+    <h2>Login</h2>
+    <label>Email</label>
+    <input type="email">
+    <label>Password</label>
+    <input type="password">
+    <button onclick="gotoOTP()">Send OTP</button>
+</div>
+
+<!-- OTP -->
+<div id="otp" class="section container">
+    <h2>OTP Verification</h2>
+    <label>Enter OTP (1234)</label>
+    <input type="number" id="otpInput">
+    <button onclick="verifyOTP()">Verify OTP</button>
+    <p id="otpMsg"></p>
+</div>
+
+<!-- SIGN UP -->
+<div id="signup" class="section container">
+    <h2>Sign Up</h2>
+    <label>Name</label>
+    <input type="text">
+    <label>Email</label>
+    <input type="email">
+    <label>Password</label>
+    <input type="password">
+    <button>Register</button>
+</div>
+
+<!-- RECHARGE -->
+<div id="recharge" class="section container">
+    <h2>Mobile Recharge</h2>
+    <label>Mobile Number</label>
+    <input type="text">
+    <label>Operator</label>
+    <select>
+        <option>Jio</option>
+        <option>Airtel</option>
+        <option>VI</option>
+        <option>BSNL</option>
+    </select>
+    <label>Amount</label>
+    <input type="number" id="amount">
+    <button onclick="doRecharge()">Recharge</button>
+</div>
+
+<!-- WALLET -->
+<div id="wallet" class="section container">
+    <h2>Wallet Balance</h2>
+    <p class="wallet-big">₹ <span id="balance">500</span></p>
+</div>
+
+<!-- ADD MONEY -->
+<div id="addmoney" class="section container">
+    <h2>Add Money to Wallet</h2>
+    <label>Enter Amount</label>
+    <input type="number" id="addAmount">
+    <button onclick="addMoney()">Add to Wallet</button>
+    <p id="addMoneyMsg"></p>
+</div>
+
+<!-- HISTORY -->
+<div id="history" class="section container">
+    <h2>Recharge & Wallet History</h2>
+    <ul id="historyList"></ul>
+</div>
+
+<!-- OFFERS -->
+<div id="offers" class="section container">
+    <h2>Special Offers</h2>
+    <ul>
+        <li>Jio – ₹199 → 28 Days</li>
+        <li>Airtel – ₹249 → 1.5GB/day</li>
+        <li>VI – ₹149 → 24 Days</li>
+        <li>BSNL – ₹107 → Full Talktime</li>
+    </ul>
+    <button onclick="applyOffer()">Apply Best Offer</button>
+</div>
+
+<!-- REMINDER -->
+<div id="reminder" class="section container">
+    <h2>Auto Recharge Reminder</h2>
+    <label>Mobile Number</label>
+    <input type="text">
+    <label>Recharge Date</label>
+    <input type="date" id="reminderDate">
+    <button onclick="setReminder()">Set Reminder</button>
+    <p id="reminderMsg"></p>
+</div>
+
+<script>
+let balance = 500;
+let generatedOTP = 1234;
+
+function showSection(id, el) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav-center a').forEach(link => link.classList.remove('active'));
+    el.classList.add('active');
+}
+
+function gotoOTP() {
+    alert("✅ OTP Sent! Demo OTP: 1234");
+    showSection("otp", document.querySelectorAll('.nav-center a')[1]);
+}
+
+function verifyOTP() {
+    let userOTP = document.getElementById("otpInput").value;
+    document.getElementById("otpMsg").innerText =
+        userOTP == generatedOTP ? "✅ Login Successful!" : "❌ Invalid OTP";
+}
+
+function doRecharge() {
+    let amt = Number(document.getElementById("amount").value);
+
+    if (amt <= 0 || amt > balance) {
+        alert("❌ Invalid Amount");
+        return;
+    }
+
+    balance -= amt;
+    document.getElementById("balance").innerText = balance;
+
+    let li = document.createElement("li");
+    li.innerText = "Recharge: ₹" + amt;
+    document.getElementById("historyList").appendChild(li);
+
+    alert("✅ Recharge Successful!");
+}
+
+function addMoney() {
+    let addAmt = Number(document.getElementById("addAmount").value);
+
+    if (addAmt <= 0) {
+        alert("❌ Enter valid amount");
+        return;
+    }
+
+    balance += addAmt;
+    document.getElementById("balance").innerText = balance;
+
+    document.getElementById("addMoneyMsg").innerText =
+        "✅ ₹" + addAmt + " added to wallet!";
+
+    let li = document.createElement("li");
+    li.innerText = "Wallet Top-Up: ₹" + addAmt;
+    document.getElementById("historyList").appendChild(li);
+}
+
+function applyOffer() {
+    alert("✅ Best offer applied!");
+}
+
+function setReminder() {
+    let date = document.getElementById("reminderDate").value;
+    document.getElementById("reminderMsg").innerText =
+        "✅ Reminder set for " + date;
+}
+</script>
+
+</body>
+</html>

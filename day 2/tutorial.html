@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login • QuickCharge</title>
+
+  <style>
+    :root {
+      --accent: #0066ff;
+      --bg: #f4f7fb;
+      --radius: 14px;
+      --shadow: 0 6px 20px rgba(13, 38, 76, 0.10);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+    * { box-sizing: border-box; }
+    body {
+      background: linear-gradient(180deg, #eef4ff, var(--bg));
+      margin: 0;
+      display: flex;
+      height: 100vh;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      padding: 32px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .logo-box {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+    .logo {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent), #00b4ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(0, 102, 255, 0.25);
+    }
+
+    h2 {
+      text-align: center;
+      margin: 0;
+      margin-bottom: 25px;
+      color: #08306b;
+      font-size: 24px;
+    }
+
+    label {
+      font-size: 14px;
+      color: #6b7280;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid #e4e9f2;
+      margin-top: 6px;
+      margin-bottom: 16px;
+      font-size: 15px;
+      outline: none;
+      background: #fff;
+    }
+    input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0, 102, 255, 0.10);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 8px;
+      box-shadow: 0 6px 18px rgba(0, 102, 255, 0.12);
+    }
+
+    .btn:hover {
+      opacity: 0.95;
+    }
+
+    .link-box {
+      text-align: center;
+      margin-top: 16px;
+      font-size: 14px;
+    }
+    .link-box a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .footer-text {
+      margin-top: 20px;
+      text-align: center;
+      color: #8b95a6;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-card">
+    <div class="logo-box">
+      <div class="logo">QC</div>
+    </div>
+
+    <h2>Login to QuickCharge</h2>
+
+    <form action="index.html" method="GET">
+      <label>Email</label>
+      <input type="email" name="email" placeholder="Enter your email" required>
+
+      <label>Password</label>
+      <input type="password" name="password" placeholder="Enter password" required>
+
+      <button class="btn">Login</button>
+
+      <div class="link-box">
+        <p>New user? <a href="register.html">Create account</a></p>
+      </div>
+    </form>
+
+    <p class="footer-text">Secure & Fast Login • Powered by QuickCharge</p>
+  </div>
+
+</body>
+</html>
